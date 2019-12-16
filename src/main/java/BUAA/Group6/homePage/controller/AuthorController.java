@@ -22,12 +22,19 @@ public class AuthorController {
     @Autowired
     AuthorService authorService;
 
+
+    //这几个接口现在可能响应会很慢，因为数据库的索引正在建立中
     @RequestMapping(value = "getAuthorByName", method = RequestMethod.GET)
     public Author getByName(@RequestParam String name){
         return authorRepository.getByName(name);
     }
 
-    @RequestMapping(value = "getAllAuthor", method = RequestMethod.GET)
+    @RequestMapping(value = "getAuthorById", method = RequestMethod.GET)
+    public Author getById(@RequestParam String id){
+        return authorRepository.getById(id);
+    }
+
+    @RequestMapping(value = "getAllAuthor", method = RequestMethod.GET)//暂时不要使用这个接口，因为数据过大，耗时很长
     public List<Author> allAuthor(){
         return authorService.getAllAuthor();
     }
