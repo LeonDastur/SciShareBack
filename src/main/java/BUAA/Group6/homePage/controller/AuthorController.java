@@ -26,7 +26,7 @@ public class AuthorController {
     //这几个接口现在可能响应会很慢，因为数据库的索引正在建立中
     @RequestMapping(value = "getAuthorByName", method = RequestMethod.GET)
     public Author getByName(@RequestParam String name){
-        return authorRepository.getByName(name);
+        return authorRepository.getByNormalizedName(name);
     }
 
     @RequestMapping(value = "getAuthorById", method = RequestMethod.GET)
