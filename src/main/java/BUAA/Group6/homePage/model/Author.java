@@ -2,6 +2,7 @@ package BUAA.Group6.homePage.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -14,7 +15,8 @@ public class Author {
 
     private String name;
 
-    private String normalized_name;
+    @Field("normalized_name")
+    private String normalizedName;
 
     private List<Object> pubs;
 
@@ -46,12 +48,12 @@ public class Author {
         this.name = name;
     }
 
-    public String getNormalized_name() {
-        return normalized_name;
+    public String getNormalizedName() {
+        return normalizedName;
     }
 
-    public void setNormalized_name(String normalized_name) {
-        this.normalized_name = normalized_name;
+    public void setNormalizedName(String normalizedName) {
+        this.normalizedName = normalizedName;
     }
 
     public List<Object> getPubs() {
