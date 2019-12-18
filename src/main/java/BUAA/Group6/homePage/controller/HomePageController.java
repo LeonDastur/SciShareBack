@@ -1,42 +1,56 @@
 package BUAA.Group6.homePage.controller;
 
+
 import BUAA.Group6.homePage.Result.Result;
 import BUAA.Group6.homePage.Result.ResultFactory;
-import BUAA.Group6.homePage.utils.FileUploadUtil;
-import BUAA.Group6.homePage.utils.FilenameUtil;
+import BUAA.Group6.homePage.model.*;
+import BUAA.Group6.homePage.repo.ExpertRepository;
+import BUAA.Group6.homePage.repo.ResearchRepository;
+import BUAA.Group6.homePage.service.ExpertService;
+import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-import java.io.File;
 
 @RestController
+@CrossOrigin
 
+@RequestMapping("/home")
 public class HomePageController {
 
-    @RequestMapping(value = "/uploadPictures", method = RequestMethod.POST, consumes = "multipart/form-data")
-    @ResponseBody
-    public Result uploadPictures(@RequestParam MultipartFile file,
-        HttpServletRequest request) {
-        String localPath = "E:/upload/";
+    @Autowired
+    ExpertRepository expertRepo;
 
-        //获取文件名
-        String fileName = file.getOriginalFilename();
-        fileName = FilenameUtil.getFileName(fileName);
-        File dest = new File(localPath + fileName);
-        if(FileUploadUtil.upload(file, localPath, fileName)) {
-            // 将上传的文件写入服务器
-            // 获取当前项目运行的完整url
-            String requestURL = request.getRequestURL().toString();
-            //获取当前项目的请求路径url
-            String requestURI = request.getRequestURI();
-            String url = requestURL.substring(0, requestURL.length() -
-                    requestURI.length() + 1);
-            url += "images" + fileName;
-            return ResultFactory.buildSuccessResult(url);
+    @Autowired
+    ResearchRepository researchRepo;
+
+    @Autowired
+    ExpertService expertService;
+
+    @RequestMapping(value = "/loadHomePage", method = RequestMethod.GET)
+    public Result getHomePageItem(@RequestParam String expertName) {
+        Expert expert = expertRepo.getExpertByUsername(expertName);
+        if(expert == null) {
+            return ResultFactory.buildFailResult("专家不存在");
         }
-
-        return ResultFactory.buildFailResult("上传失败");
+        String id = expert.getId();
+        List<Research> researchList = researchRepo.getResearchesByExpertId(id);
+        return ResultFactory.buildSuccessResult(new HomePage(expert, researchList));
     }
+
+    @RequestMapping(value = "/updateIntro")
+    public Result updateIntro(@RequestParam String expertName, @RequestParam String intro,
+                              @RequestParam List<String> skills) {
+        Expert expert = expertRepo.getExpertByUsername(expertName);
+        if(expert == null)
+            return ResultFactory.buildFailResult("用户不存在");
+
+        expertService.updateExpertIntro(expert.getId(), intro, skills);
+        return ResultFactory.buildSuccessResult("用户介绍修改成功");
+    }
+
+
+
 }
