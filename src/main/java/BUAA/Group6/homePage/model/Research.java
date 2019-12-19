@@ -1,5 +1,6 @@
 package BUAA.Group6.homePage.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -7,7 +8,8 @@ import java.util.List;
 @Document(collection = "researches")
 public class Research {
 
-    private String ExpertId;
+    @Id
+    private String expertId;
 
     private String title;
 
@@ -18,11 +20,11 @@ public class Research {
     private List<String> expertsName;
 
     public String getExpertId() {
-        return ExpertId;
+        return expertId;
     }
 
     public void setExpertId(String expertId) {
-        ExpertId = expertId;
+        expertId = expertId;
     }
 
     public String getTitle() {

@@ -1,6 +1,7 @@
 package BUAA.Group6.homePage.service;
 
 import BUAA.Group6.homePage.model.Expert;
+import BUAA.Group6.homePage.model.ExpertInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -38,5 +39,16 @@ public class ExpertServiceImpl implements ExpertService {
     }
 
 
-
+    @Override
+    public void updateExpertInfo(String id, ExpertInfo expertInfo) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("Id").is(id));
+        Update update = new Update();
+        update.set("institution", expertInfo.getInstitution());
+        update.set("degree", expertInfo.getDegree());
+        update.set("webSiteUrl", expertInfo.getWebSiteUrl());
+        update.set("phone", expertInfo.getPhone());
+        update.set("email", expertInfo.getEmail());
+        mongoTemplate.findAndModify(query, update, Expert.class);
+    }
 }
