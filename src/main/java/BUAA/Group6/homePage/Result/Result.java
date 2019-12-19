@@ -1,5 +1,7 @@
 package BUAA.Group6.homePage.Result;
 
+import java.io.Serializable;
+
 public class Result {
     /**
      * 响应状态码

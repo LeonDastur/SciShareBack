@@ -1,6 +1,6 @@
 package BUAA.Group6.homePage.service;
 
-import BUAA.Group6.homePage.model.Author;
+import BUAA.Group6.homePage.model.Paper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @Service
 @Primary
-public class AuthorServiceImpl implements AuthorService{
+public class PaperServiceImpl implements PaperService {
     @Autowired
     MongoTemplate mongoTemplate;
 
     @Override
-    public List<Author> getAllAuthor() {
-        return mongoTemplate.findAll(Author.class);
+    public List<Paper> getAllPapers() {
+        return mongoTemplate.findAll(Paper.class);
     }
-}
+ }

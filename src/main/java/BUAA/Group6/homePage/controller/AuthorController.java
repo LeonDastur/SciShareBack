@@ -1,19 +1,16 @@
 package BUAA.Group6.homePage.controller;
 
 import BUAA.Group6.homePage.model.Author;
-import BUAA.Group6.homePage.service.AuthorRepository;
+import BUAA.Group6.homePage.repo.AuthorRepository;
 import BUAA.Group6.homePage.service.AuthorService;
-import BUAA.Group6.homePage.service.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class AuthorController {
     @Autowired
     RestTemplate restTemplate;
@@ -38,4 +35,5 @@ public class AuthorController {
     public List<Author> allAuthor(){
         return authorService.getAllAuthor();
     }
+
 }
