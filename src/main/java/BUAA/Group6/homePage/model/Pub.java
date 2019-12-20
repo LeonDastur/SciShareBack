@@ -2,7 +2,7 @@ package BUAA.Group6.homePage.model;
 
 public class Pub {
     private String i;
-    private String r;
+    private int r;
 
     public String getI() {
         return i;
@@ -12,11 +12,11 @@ public class Pub {
         this.i = i;
     }
 
-    public String getR() {
+    public int getR() {
         return r;
     }
 
-    public void setR(String r) {
+    public void setR(int r) {
         this.r = r;
     }
 }

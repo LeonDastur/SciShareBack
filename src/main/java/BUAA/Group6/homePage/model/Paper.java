@@ -3,19 +3,26 @@ package BUAA.Group6.homePage.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-@Document(collection = "magPapers")
+@Document(collection = "magpapers")
 public class Paper {
+
     @Id
     private String _id;
 
+    @Field(value = "id")
     private String id;
 
     private String title;
 
-    private List<Author> authors;
+    @Field(value = "authors")
+    private List<SimpleAuthor> authors;
+
+    @Field(value = "venue")
+    private Venue venue;
 
     private int year;
 
@@ -33,13 +40,6 @@ public class Paper {
 
     private String issue;
 
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
 
     public String getId() {
         return id;
@@ -57,12 +57,20 @@ public class Paper {
         this.title = title;
     }
 
-    public List<Author> getAuthors() {
+    public List<SimpleAuthor> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(List<SimpleAuthor> authors) {
         this.authors = authors;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 
     public int getYear() {

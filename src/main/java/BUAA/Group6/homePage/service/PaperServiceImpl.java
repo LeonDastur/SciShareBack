@@ -4,8 +4,11 @@ import BUAA.Group6.homePage.model.Paper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,4 +21,6 @@ public class PaperServiceImpl implements PaperService {
     public List<Paper> getAllPapers() {
         return mongoTemplate.findAll(Paper.class);
     }
- }
+
+
+}
