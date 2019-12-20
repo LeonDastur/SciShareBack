@@ -6,6 +6,8 @@ public class HomePage implements Serializable{
 
     private String realName;
 
+    private String expertID;
+
     private int follows;
 
     private int fans;
@@ -29,13 +31,35 @@ public class HomePage implements Serializable{
     private String email;
 
     public HomePage(Author author, List<Paper> paperList) {
-        realName = author.getName();
-        follows = author.getFollows();
-        fans = author.getFans();
-        introduction = author.getIntroduction();
-        pictureUrl = author.getPictureUrl();
-        skills = author.getSkills();
-        researchList = paperList;
+        this.realName = author.getName();
+        this.expertID = author.getId();
+        this.follows = author.getFollows();
+        this.fans = author.getFans();
+        this.introduction = author.getIntroduction();
+        this.pictureUrl = author.getPictureUrl();
+        this.skills = author.getSkills();
+        this.researchList = paperList;
+        this.institution = author.getInstitution();
+        this.degree = author.getDegree();
+        this.webSiteUrl = author.getWebSiteUrl();
+        this.email = author.getEmail();
+        this.phone = author.getPhone();
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getExpertID() {
+        return expertID;
+    }
+
+    public void setExpertID(String expertId) {
+        this.expertID = expertId;
     }
 
     public String getUsername() {
@@ -133,4 +157,6 @@ public class HomePage implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

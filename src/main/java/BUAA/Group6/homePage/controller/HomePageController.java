@@ -9,14 +9,12 @@ import BUAA.Group6.homePage.repo.PaperRepository;
 import BUAA.Group6.homePage.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.java2d.pipe.AAShapePipe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/home")
 public class HomePageController {
 
     @Autowired
@@ -28,7 +26,7 @@ public class HomePageController {
     @Autowired
     AuthorService authorService;
 
-    @RequestMapping(value = "/loadHomePage", method = RequestMethod.GET)
+    @RequestMapping(value = "loadHomePage", method = RequestMethod.GET)
     public Result loadHomePage(@RequestParam String id) {
 
         Author author = authorRepository.getAuthorById(id);
@@ -47,7 +45,7 @@ public class HomePageController {
         return ResultFactory.buildSuccessResult(homePage);
     }
 
-    @RequestMapping(value = "/updateInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "updateInfo", method = RequestMethod.GET)
     public Result updateExpertInfo(@RequestParam String expertId, @RequestParam String institution,
                                    @RequestParam String degree, @RequestParam String websiteUrl,
                                    @RequestParam String email, @RequestParam String phone ) {
@@ -58,10 +56,10 @@ public class HomePageController {
         return ResultFactory.buildSuccessResult("用户信息修改成功");
     }
 
-    @RequestMapping(value = "/updateIntroduction", method = RequestMethod.POST)
+    @RequestMapping(value = "updateIntroduction", method = RequestMethod.GET)
     public Result updateIntroduction(@RequestParam String expertId,
                                      @RequestParam String introduction,
-                                     @RequestParam List<String> skills) {
+                                     @RequestBody List<String> skills) {
         Author author = authorRepository.getAuthorById(expertId);
         if(author == null) {
             return ResultFactory.buildFailResult("专家不存在");
@@ -71,7 +69,7 @@ public class HomePageController {
     }
 
 
-    @RequestMapping(value = "/getAuthor", method = RequestMethod.GET)
+    @RequestMapping(value = "getAuthor", method = RequestMethod.GET)
     public Result getAuthor(@RequestParam String id) {
         Author author = authorRepository.getAuthorById(id);
         if(author == null) {
@@ -81,7 +79,7 @@ public class HomePageController {
             return ResultFactory.buildSuccessResult(author);
     }
 
-    @RequestMapping(value = "/getPaper", method = RequestMethod.GET)
+    @RequestMapping(value = "getPaper", method = RequestMethod.GET)
     public Result getPaper(@RequestParam String id) {
         Paper paper = paperRepository.getPaperById(id);
         if(paper == null) {
